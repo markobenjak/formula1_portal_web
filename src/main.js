@@ -29,7 +29,7 @@ Vue.use(VueGoogleMaps, {
 axios.interceptors.request.use(
   config => {
     if(config.baseURL == undefined){
-      config.baseURL = "http://localhost:7777/"
+      config.baseURL = "https://formula1-web-portal.herokuapp.com/"
     }
 
     return config;
