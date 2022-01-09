@@ -16,8 +16,27 @@ import Vuelidate from 'vuelidate'
 Vue.use(Vuelidate)
 import router from './router'
 import storage from './storage.js'
+import * as VueGoogleMaps from 'vue2-google-maps'
+import { StatusCodes } from 'http-status-codes';
 
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: 'AIzaSyCmY4Nvugu4v85AKB-Wf1Ywg2fUyKzBePg',
+    libraries: 'places',
+  }
+});
 
+axios.interceptors.request.use(
+  config => {
+    if(config.baseURL == undefined){
+      config.baseURL = "http://localhost:7777/"
+    }
+
+    return config;
+    
+  },
+  error => Promise.reject(error)
+);
 
 const getRuntimeConfig = async () => {
    const runtimeConfig = await fetch('config.json');
