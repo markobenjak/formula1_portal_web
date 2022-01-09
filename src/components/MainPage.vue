@@ -213,7 +213,7 @@ export default {
 <style scoped>
   .jumbotronDiv{
     border: 1px solid;
-    background-image:url('../assets/mainImage.jpg');
+    background-image:url('../assets/animation.gif');
   
     height: 500px;
 
