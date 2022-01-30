@@ -6,8 +6,84 @@
           <h1>
             Welcome to Formula 1 Community Portal
           </h1>
-          <b-button pill class="userButton" variant="outline-info" >Login</b-button>
-          <b-button pill class="userButton" variant="outline-info" >Sign Up</b-button>
+          <b-button pill class="userButton" variant="outline-info" v-b-modal.modal-login v-on:click="clearLoginModal()">Login</b-button>
+          <b-button pill class="userButton" variant="outline-info" v-b-modal.modal-signUp v-on:click="clearSignUpModal()">Sign Up</b-button>
+
+          <b-modal id="modal-login" centered title="Login">
+            <label for="loginUsername"><b>Username:</b></label>
+            <b-form-input
+              id="loginUsername"
+              v-model="loginUsername"
+              placeholder="Enter your username"
+            ></b-form-input>
+            <label for="loginPassword"><b>Password:</b></label>
+            <b-form-input
+              id="loginPassword"
+              v-model="loginPassword"
+              placeholder="Enter your password"
+              type="password"
+            ></b-form-input>
+
+            <template #modal-footer="{ ok, cancel }">
+              <b-button size="sm" variant="success" @click="ok();login()">
+                Login
+              </b-button>
+              <b-button size="sm" variant="danger" @click="cancel()">
+                Cancel
+              </b-button>
+            </template>
+          </b-modal>
+
+          <b-modal id="modal-signUp" centered title="SignUp">
+            <label for="signUpEmail"><b>Email:</b></label>
+            <b-form-input
+              id="signUpEmail"
+              v-model="signUpEmail"
+              placeholder="Enter your E-mail"
+            ></b-form-input>
+
+            <label for="signUpUsername"><b>Username:</b></label>
+            <b-form-input
+              id="signUpUsername"
+              v-model="signUpUsername"
+              placeholder="Enter your username"
+              autocomplete="off"
+            ></b-form-input>
+            
+            <label for="signUpPassword"><b>Password:</b></label>
+            <b-form-input
+              id="signUpPassword"
+              v-model="signUpPassword"
+              placeholder="Enter your password"
+              type="password"
+              autocomplete="off"
+            ></b-form-input>
+
+            <label for="signUpPasswordRepeat"><b>Repeat Password:</b></label>
+            <b-form-input
+              id="signUpPasswordRepeat"
+              v-model="signUpPasswordRepeat"
+              placeholder="Enter your password"
+              type="password"
+              :state="repeatePasswordValidator"
+            ></b-form-input>
+
+            <label for="signUpFullName"><b>Full Name:</b></label>
+            <b-form-input
+              id="signUpFullName"
+              v-model="signUpFullName"
+              placeholder="Enter your Full Name"
+            ></b-form-input>
+
+            <template #modal-footer="{ ok, cancel }">
+              <b-button size="sm" variant="success" @click="ok();signUp()">
+                Register
+              </b-button>
+              <b-button size="sm" variant="danger" @click="cancel()">
+                Cancel
+              </b-button>
+            </template>
+          </b-modal>
         </div>
         <!--<div class="mainNewsArticle" :style="{ 'background-image': 'url(' + this.mainArticles[0].articleImage + ')' }">
           <h3>
@@ -106,37 +182,63 @@
           :interval="4000"
           controls
           indicators
-          background="#ababab"
           img-width="1024"
-          img-height="200"
+          img-height="400"
           style="text-shadow: 1px 1px 2px #333;"
           @sliding-start="onSlideStart"
           @sliding-end="onSlideEnd"
         >
           <!-- Text slides with image -->
-          <b-carousel-slide caption="Blank Image" img-blank img-alt="Blank image">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eros felis, tincidunt
-              a tincidunt eget, convallis vel est. Ut pellentesque ut lacus vel interdum.
-            </p>
+          <b-carousel-slide>
+            <template #img>
+              <img
+                class="d-block img-fluid w-100"
+                width="1024"
+                height="480"
+                src="../assets/White_background.png"
+                alt="image slot"
+              >
+            </template>
+            <iframe border=0 frameborder=0 height=500 width=500
+              :src="this.twitterUrls[0]"></iframe>
+
+            <iframe border=0 frameborder=0 height=500 width=500
+              :src="this.twitterUrls[1]"></iframe>
           </b-carousel-slide>
 
 
-          <!-- Slides with img slot -->
-          <!-- Note the classes .d-block and .img-fluid to prevent browser default image alignment -->
-          <b-carousel-slide caption="Blank Image" img-blank img-alt="Blank image">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eros felis, tincidunt
-              a tincidunt eget, convallis vel est. Ut pellentesque ut lacus vel interdum.
-            </p>
+          <b-carousel-slide>
+            <template #img>
+              <img
+                class="d-block img-fluid w-100"
+                width="1024"
+                height="480"
+                src="../assets/White_background.png"
+                alt="image slot"
+              >
+            </template>
+            <iframe border=0 frameborder=0 height=500 width=500
+              :src="this.twitterUrls[2]"></iframe>
+
+            <iframe border=0 frameborder=0 height=500 width=500
+              :src="this.twitterUrls[3]"></iframe>
           </b-carousel-slide>
 
-          <!-- Slide with blank fluid image to maintain slide aspect ratio -->
-          <b-carousel-slide caption="Blank Image" img-blank img-alt="Blank image">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eros felis, tincidunt
-              a tincidunt eget, convallis vel est. Ut pellentesque ut lacus vel interdum.
-            </p>
+          <b-carousel-slide>
+            <template #img>
+              <img
+                class="d-block img-fluid w-100"
+                width="1024"
+                height="480"
+                src="../assets/White_background.png"
+                alt="image slot"
+              >
+            </template>
+            <iframe border=0 frameborder=0 height=500 width=500
+              :src="this.twitterUrls[4]"></iframe>
+
+            <iframe border=0 frameborder=0 height=500 width=500
+              :src="this.twitterUrls[5]"></iframe>
           </b-carousel-slide>
         </b-carousel>
     </div>
@@ -158,13 +260,85 @@ export default {
       secondaryArticles: [],
       mainArticles: [],
       currentSeason: [],
+      loginUsername: '',
+      loginPassword: '',
+      loginPasswordRepeat: '',
+      signUpUsername: '',
+      signUpPassword: '',
+      signUpPasswordRepeat: '',
+      signUpEmail: '',
+      signUpFullName: '',
+      twitterUrls: [],
     } 
   },
-   mounted (){
+  computed:{
+      repeatePasswordValidator() {
+        return this.signUpPasswordRepeat == this.signUpPassword ? true : false;
+      }
+  },
+  mounted (){
     this.getArticles();
     this.getCurrentSeason();
+    this.getSocialMedia();
   },
   methods: {
+      clearLoginModal(){
+        this.loginUsername = '';
+        this.loginPassword = '';
+      },
+      clearSignUpModal(){
+        this.signUpUsername = '';
+        this.signUpPassword = '';
+        this.signUpEmail = '';
+        this.signUpFullName = '';
+        this.signUpPasswordRepeat = '';
+      },
+      signUp(){
+        let URL = 'portal/auth/signup';
+        let promise = axios.post(URL, {
+          username: this.signUpUsername,
+          password: this.signUpPassword,
+          email: this.signUpEmail
+        })
+        return promise.then((response) => {
+            if(response.status == '200'){
+              this.makeToast("SUCCESS", "success", response.data.message, 50000 )
+              this.$root.$emit('bv::show::modal', 'modal-login', '#focusThisOnClose')
+            }
+          },
+          ).catch(err => {
+            this.makeToast(err.response.data.error, "info", err.response.data.message, 50000 )
+                                    
+          })
+      },
+      login(){
+        let URL = 'portal/auth/signin';
+        let promise = axios.post(URL, {
+          username: this.loginUsername,
+          password: this.loginPassword
+        })
+        return promise.then((response) => {
+            if(response.status == '200'){
+              this.$store.commit('setSessionID', response.data.accessToken);
+              this.$store.commit('setUsername', response.data.username);
+              this.$store.commit('setUserRole', response.data.roles);
+              
+            }
+          },
+          ).catch(err => {
+            this.makeToast(err.response.data.error, "info", err.response.data.message, 50000 )
+                                    
+          })
+      },
+      makeToast(title, variant, content, delay) {
+            this.$bvToast.toast(content, {
+                title: title,
+                toaster: 'b-toaster-top-center',
+                variant: variant,
+                solid: true,
+                "auto-hide-delay": delay
+            })
+      },
       onSlideStart(slide) {
         this.sliding = true
       },
@@ -205,12 +379,28 @@ export default {
           alert('ALERTR');
         })
     },
+    getSocialMedia() {
+      let URL = 'portal/socialMedia';
+      let promise = axios.get(URL)
+      return promise.then((response) => {
+          if(response.status == '200'){
+            this.twitterUrls = response.data.urls
+            console.log(this.twitterUrls)
+          }else{
+            alert('ALERT');
+          }
+
+        },
+        ).catch(err => {
+          alert('ALERTR');
+        })
+    },
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
   .jumbotronDiv{
     border: 1px solid;
     background-image:url('../assets/animation.gif');
@@ -286,7 +476,16 @@ export default {
   .carouselDiv{
     margin:  0 auto;
     width: 80%;
-    margin-top: 3%;
-    margin-bottom: 10%;
+    margin-bottom: 1%;
+  }
+  iframe{
+    float: left;
+    margin-left: 1%;
+  }
+  .carousel-control-next-icon {
+    background-image: url('../assets/next.png') !important;
+  }
+  .carousel-control-prev-icon {
+    background-image: url('../assets/back.png') !important
   }
 </style>

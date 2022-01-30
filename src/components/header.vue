@@ -8,13 +8,15 @@
         <b-navbar-nav class="navigation">
             <b-nav-item to="/">Home</b-nav-item>
             <b-nav-item to="/archive">Archive</b-nav-item>
+            <b-nav-item to="/userManagement" v-if="userRole != null && userRole.includes('ROLE_ADMIN')">UserManagement</b-nav-item>
+            <b-nav-item to="/userManagement" >User Management</b-nav-item>
         </b-navbar-nav>
 
         <b-dropdown id="dropdown-right" right text="Right align" variant="light" class="m-2">
             <template v-slot:button-content>
                 <b-icon-person-circle scale="1.2"></b-icon-person-circle>
             </template>
-            <b-dropdown-item class="userName">Log in
+            <b-dropdown-item class="userName" @click="login()">Log in
                 <b-icon icon="person-fill"></b-icon> 
             </b-dropdown-item>
 
@@ -33,7 +35,9 @@ export default {
         }
     },
     computed: {
-       
+        userRole () {
+            return this.$store.state.user.userRole
+        },
     },
 
     validations: {
@@ -41,7 +45,9 @@ export default {
     },
 
     methods: {
-       
+       login(){
+        
+       }
     }
 }
 

@@ -29,7 +29,11 @@ Vue.use(VueGoogleMaps, {
 axios.interceptors.request.use(
   config => {
     if(config.baseURL == undefined){
-      config.baseURL = "https://formula1-web-portal.herokuapp.com/"
+      config.baseURL = "http://localhost:7777/"
+    }
+    console.log(storage.state.user.userRole)
+    if (storage.state.user.sessionID != null) {
+      config.headers.Authorization = `Bearer ${storage.state.user.sessionID}`;
     }
 
     return config;

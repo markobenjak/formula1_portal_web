@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <div class="collapseDiv">
-      <b-card no-body class="mb-1">
+      <b-card no-body class="mb-1 archiveCards">
         <b-card-header header-tag="header" class="p-1" role="tab">
           <b-button block variant="info" v-b-toggle.driversCollapse>Drivers</b-button>
         </b-card-header>
@@ -23,7 +23,7 @@
           </b-card-body>
         </b-collapse>
       </b-card>
-      <b-card no-body class="mb-1">
+      <b-card no-body class="mb-1 archiveCards">
         <b-card-header header-tag="header" class="p-1" role="tab">
           <b-button block variant="info" v-b-toggle.constructorsCollapse>Constructors</b-button>
         </b-card-header>
@@ -45,7 +45,7 @@
             </b-card-body>
           </b-collapse>
         </b-card>
-        <b-card no-body class="mb-1">
+        <b-card no-body class="mb-1 archiveCards">
           <b-card-header header-tag="header" class="p-1" role="tab">
             <b-button block variant="info" v-b-toggle.circuitsCollapse>Circuits</b-button>
           </b-card-header>
@@ -67,7 +67,7 @@
             </b-card-body>
           </b-collapse>
         </b-card>
-        <b-card no-body class="mb-1">
+        <b-card no-body class="mb-1 archiveCards">
           <b-card-header header-tag="header" class="p-1" role="tab">
             <b-button block variant="info" v-b-toggle.seasonsCollapse>Seasons</b-button>
           </b-card-header>
@@ -234,7 +234,10 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
+  .archiveCards {
+    border: none;
+  }
   .jumbotronDiv{
     border: 1px solid;
     background-image:url('../assets/mainImage.jpg');
