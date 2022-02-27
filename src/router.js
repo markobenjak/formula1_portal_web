@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import MainPage from './components/MainPage.vue'
 import Archive from './components/Archive.vue'
 import UserManagement from './components/UserManagement.vue'
+import Forum from './components/Forum.vue'
 
 
 Vue.use(Router)
@@ -23,6 +24,11 @@ export default new Router({
       path: '/userManagement',
       name: 'UserManagement',
       component: UserManagement
+    },
+    {
+      path: '/forum',
+      name: 'Forum',
+      component: Forum
     },
   ]
 })

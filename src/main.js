@@ -14,6 +14,9 @@ Vue.use(IconsPlugin)
 Vue.use(NavbarPlugin)
 import Vuelidate from 'vuelidate'
 Vue.use(Vuelidate)
+
+import CKEditor from '@ckeditor/ckeditor5-vue2';
+Vue.use( CKEditor )
 import router from './router'
 import storage from './storage.js'
 import * as VueGoogleMaps from 'vue2-google-maps'
@@ -29,7 +32,7 @@ Vue.use(VueGoogleMaps, {
 axios.interceptors.request.use(
   config => {
     if(config.baseURL == undefined){
-      config.baseURL = "http://localhost:7777/"
+      config.baseURL = "https://formula1-web-portal.herokuapp.com/"
     }
     console.log(storage.state.user.userRole)
     if (storage.state.user.sessionID != null) {
@@ -48,8 +51,6 @@ const getRuntimeConfig = async () => {
 }
 getRuntimeConfig().then(function(json) {
   axios.defaults.baseURL = json.WEB_SERVICE_URL;
-        console.log('TU SAM: ' 
-        + axios.defaults.baseURL);
 });
 new Vue({
     render: h => h(App),

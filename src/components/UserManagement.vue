@@ -1,7 +1,5 @@
 <template>
   <div class="hello">
-    <b-button class="userButtons" variant="outline-success">Add User</b-button>
-
     <div class="userTable">
       <b-table
         no-border-collapse
