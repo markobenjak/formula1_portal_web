@@ -9,8 +9,9 @@
             <b-nav-item to="/">Home</b-nav-item>
             <b-nav-item to="/archive">Archive</b-nav-item>
             <b-nav-item to="/userManagement" v-if="userRole != null && userRole.includes('ROLE_ADMIN')">UserManagement</b-nav-item>
-            <!--<b-nav-item to="/userManagement" >User Management</b-nav-item>-->
+            <b-nav-item to="/userManagement" >User Management</b-nav-item>
             <b-nav-item to="/forum" >Forum</b-nav-item>
+            <b-nav-item to="/blog" >Blog</b-nav-item>
         </b-navbar-nav>
 
         <b-dropdown id="dropdown-right" right text="Right align" variant="light" class="m-2">

@@ -4,7 +4,7 @@ import MainPage from './components/MainPage.vue'
 import Archive from './components/Archive.vue'
 import UserManagement from './components/UserManagement.vue'
 import Forum from './components/Forum.vue'
-
+import Blog from './components/Blog.vue'
 
 Vue.use(Router)
 
@@ -29,6 +29,11 @@ export default new Router({
       path: '/forum',
       name: 'Forum',
       component: Forum
+    },
+    {
+      path: '/blog',
+      name: 'Blog',
+      component: Blog
     },
   ]
 })
