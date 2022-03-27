@@ -2,7 +2,7 @@
   <div class="hello">
     <div class="forumDiv">
       <b-breadcrumb class="breadItem">
-        <b-breadcrumb-item @click="$bvModal.show('addPost'); clearPostModal()">
+        <b-breadcrumb-item @click="$bvModal.show('addPost'); clearPostModal()" v-if="userRole.includes('ROLE_MODERATOR')  || userRole.includes('ROLE_ADMIN')">
           <b-icon icon="newspaper" scale="1.25" shift-v="1.25" aria-hidden="true"></b-icon>
           New Post
         </b-breadcrumb-item>
@@ -28,7 +28,7 @@
           <b-button class="mt-3" block @click="$bvModal.hide('addPost')">Close</b-button>
           <b-button class="mt-3" variant="success" block @click="$bvModal.hide('addPost'); insertBlogPost()">Finish</b-button>
         </b-modal>
-        <b-breadcrumb-item  @click="$bvModal.show('addPlanRace'); clearPlanModal()">
+        <b-breadcrumb-item  @click="$bvModal.show('addPlanRace'); clearPlanModal()" v-if="userRole.includes('ROLE_MODERATOR')  || userRole.includes('ROLE_ADMIN')">
           <b-icon icon="pencil" scale="1.25" shift-v="1.25" aria-hidden="true"></b-icon>
           Plan a Race
         </b-breadcrumb-item>

@@ -24,5 +24,11 @@ export default new Vuex.Store({
     setUserRole (state, userRole) {
       state.user.userRole = userRole;
     },
+    logoutUser(state){
+      state.user.sessionID = null;
+      state.user.username = '';
+      state.user.userRole = [];
+
+    }
   }
 })

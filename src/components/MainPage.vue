@@ -322,7 +322,7 @@ export default {
               this.$store.commit('setSessionID', response.data.accessToken);
               this.$store.commit('setUsername', response.data.username);
               this.$store.commit('setUserRole', response.data.roles);
-              
+              this.makeToast("SUCCESS", "success", "Login Complete", 50000 )
             }
           },
           ).catch(err => {
@@ -385,7 +385,6 @@ export default {
       return promise.then((response) => {
           if(response.status == '200'){
             this.twitterUrls = response.data.urls
-            console.log(this.twitterUrls)
           }else{
             alert('ALERT');
           }
