@@ -97,9 +97,10 @@
 
 <script>
 import axios from 'axios'
+
 //import { required } from 'vuelidate/lib/validators'
 export default {
-  name: 'MainPage',
+  name: 'Archive',
   props: {
     msg: String
   },
@@ -165,7 +166,7 @@ export default {
       onSlideEnd(slide) {
         this.sliding = false
       },
-      getDrivers() {
+    getDrivers() {
 
       let URL = 'portal/archive/drivers';
       let promise = axios.get(URL)

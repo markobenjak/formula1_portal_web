@@ -35,7 +35,7 @@
           </b-card-header>
           <b-collapse :id="item.id" :accordion="item.id" role="tabpanel">
             <b-card-body>
-              <div v-html="item.content"></div>
+              <div class="contentDiv" v-html="item.content"></div>
               <hr/>
                 <b-card
                   no-body 
@@ -43,7 +43,7 @@
                   v-for="comment in item.forumComments"  :key="comment.id"
                 >
                   <b-card-text v-html="comment.comment"></b-card-text>
-                  <b-card-footer>
+                  <b-card-footer class="commentFooter">
                     <p class="userComment">User: {{comment.comment_owner}}</p>
                     <p class="dateComment">Date: {{comment.creation_date}}</p>
                     <b-button class="mt-3" block variant="outline-info" v-if="userRole.includes('ROLE_ADMIN', 'ROLE_MODERATOR')" @click="deleteComment(comment.id)">Delete Comment</b-button>
@@ -168,7 +168,7 @@ export default {
       })
       return promise.then((response) => {
         if(response.status == 200){
-          this.makeToast("Topic Created", "success", response.data.message, 30000);
+          this.makeToast("Comment Deleted", "success", response.data.message, 30000);
           this.getAllTopics();
         }else{
           alert('ALERT');
@@ -247,6 +247,7 @@ export default {
   .forumCard {
     border: none;
     text-align: left;
+
   }
   .accordion{
     margin: 0 auto;
@@ -274,8 +275,8 @@ export default {
   }
   .commentCards {
     border: none;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     margin-bottom: 1%;
+    box-shadow: none;
   }
   .userComment{
     float: left;
@@ -284,5 +285,12 @@ export default {
   .dateComment{
     float: right;
     opacity: 0.5;
+  }
+  .contentDiv{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 1%;
+  }
+  .commentFooter{
+    box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;
   }
 </style>

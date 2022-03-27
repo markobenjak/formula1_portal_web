@@ -93,12 +93,12 @@
           <b-button variant="success" :href="this.mainArticles[0].articleUrl" target="_blank">Read More...</b-button>
         </div>-->
         <div class="mainNewsArticle" >
-          <b-embed
-            type="iframe"
-            aspect="16by9"
-            src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0"
-            allowfullscreen
-          ></b-embed>
+            <b-embed
+              type="iframe"
+              aspect="16by9"
+              src="https://www.youtube.com/embed/hGIYpA2rBxw"
+              allowfullscreen
+            ></b-embed>
         </div>
       </b-jumbotron>
     </div>
@@ -429,7 +429,8 @@ export default {
   }
   .mainNewsArticle{
     float: left;
-    width: 30%;
+    width: 40%;
+    opacity: 0.9;
   }
   .tabDiv{
     float: left;
@@ -449,14 +450,14 @@ export default {
   .newsClass, .card-footer{
     border: none !important;
     background-color: white;
-    box-shadow: 10px 10px 5px #aaaaaa;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
   }
   .card {
     background-color: white;
-    border-top:    5px solid red;
-    border-right:  5px solid red; 
+
     border-left: none !important;
     border-bottom: none !important;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
   }
   h1{
     color:  white;
@@ -488,4 +489,28 @@ export default {
   .carousel-control-prev-icon {
     background-image: url('../assets/back.png') !important
   }
+
+
+
+
+
+
+
+  .userButton {
+    background-color: transparent;
+    border: 3px solid #00d7c3;
+    border-radius: 50px;
+    -webkit-transition: all .15s ease-in-out;
+    transition: all .15s ease-in-out;
+    color: #00d7c3;
+  }
+  .userButton:hover {
+    box-shadow: 0 0 10px 0 #00d7c3 inset, 0 0 20px 2px #00d7c3;
+    border: 3px solid #00d7c3;
+  }
+
+
+
+
+
 </style>
