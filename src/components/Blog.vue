@@ -26,7 +26,7 @@
             <ckeditor :editor="editor" v-model="editorDataPost" :config="editorConfig"></ckeditor>
           </div>
           <b-button class="mt-3" block @click="$bvModal.hide('addPost')">Close</b-button>
-          <b-button class="mt-3" variant="success" block @click="$bvModal.hide('addPost'); insertBlogPost()">Finish</b-button>
+          <b-button class="mt-3" variant="success" block @click="$bvModal.hide('addPost'); insertBlogPost()">Post</b-button>
         </b-modal>
         <b-breadcrumb-item  @click="$bvModal.show('addPlanRace'); clearPlanModal()" v-if="userRole.includes('ROLE_MODERATOR')  || userRole.includes('ROLE_ADMIN')">
           <b-icon icon="pencil" scale="1.25" shift-v="1.25" aria-hidden="true"></b-icon>
@@ -157,7 +157,7 @@
           ></b-form-input>
 
           <b-button class="mt-3" block @click="$bvModal.hide('addPlanRace')">Close</b-button>
-          <b-button class="mt-3" variant="success" block @click="$bvModal.hide('addPlanRace'); insertRacePlan()">Finish</b-button>
+          <b-button class="mt-3" variant="success" block @click="$bvModal.hide('addPlanRace'); insertRacePlan()">Post</b-button>
         </b-modal>
       </b-breadcrumb>
       <b-card-group columns>
@@ -220,12 +220,22 @@
           <template #modal-footer>
             <b-button
               variant="danger"
+              class="modalButtons"
               size="sm"
-              class="float-right"
+              block
               @click="deleteRacePlan(planId); $bvModal.hide('racePlanDetails')"
               v-if="userRole.includes('ROLE_ADMIN', 'ROLE_MODERATOR')"
             >
               Delete
+            </b-button>
+            <b-button
+              variant="primary"
+              class="modalButtons"
+              block 
+              size="sm"
+              @click="$bvModal.hide('racePlanDetails')"
+            >
+              Close
             </b-button>
           </template>
       </b-modal>
@@ -238,12 +248,22 @@
           <template #modal-footer>
             <b-button
               variant="danger"
+              class="modalButtons"
               size="sm"
-              class="float-right"
+              block
               @click="deleteBlogPost(blogPostId); $bvModal.hide('blogPostDetails')"
               v-if="userRole.includes('ROLE_ADMIN', 'ROLE_MODERATOR')"
             >
               Delete
+            </b-button>
+            <b-button
+              variant="primary"
+              class="modalButtons"
+              block 
+              size="sm"
+              @click="$bvModal.hide('blogPostDetails')"
+            >
+              Close
             </b-button>
           </template>
       </b-modal>
@@ -549,6 +569,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
   <style>
+    .modalButtons{
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    }
     .blogRacePlanCard {
       border: none;
       background-color: #FCFCFC;

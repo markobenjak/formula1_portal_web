@@ -5,8 +5,18 @@
         <b-card-header header-tag="header" class="p-1" role="tab">
           <b-button block variant="info" v-b-toggle.driversCollapse>Drivers</b-button>
         </b-card-header>
-        <b-collapse id="driversCollapse" accordion="driversCollapse" role="tabpanel">
+        <b-collapse id="driversCollapse" accordion="driversCollapse" role="tabpanel" class="archiveCollapse">
           <b-card-body>
+            <b-pagination
+              v-model="currentPageDrivers"
+              :total-rows="rowsDrivers"
+              :per-page="perPageDrivers"
+              align="fill"
+              first-number
+              last-number
+              aria-controls="driversTable"
+              pills
+            ></b-pagination>
             <b-table
                 caption-top
                 sticky-header
@@ -14,10 +24,12 @@
                 small
                 head-variant="light"
                 responsive
-                :items="archiveDrivers"
+                :items="getDrivers"
                 :fields="driversFields"
                 ref="driversTable"
                 id="driversTable"
+                :per-page="perPageDrivers"
+                :current-page="currentPageDrivers"
               >
               </b-table>
           </b-card-body>
@@ -29,6 +41,16 @@
         </b-card-header>
         <b-collapse id="constructorsCollapse" accordion="constructorsCollapse" role="tabpanel">
           <b-card-body>
+            <b-pagination
+              v-model="currentPageConstructors"
+              :total-rows="rowsConstructors"
+              :per-page="perPageConstructors"
+              align="fill"
+              first-number
+              last-number
+              aria-controls="constructorsTable"
+              pills
+            ></b-pagination>
             <b-table
                 caption-top
                 sticky-header
@@ -36,10 +58,12 @@
                 small
                 head-variant="light"
                 responsive
-                :items="archiveConstructors"
+                :items="getConstructors"
                 :fields="constructorsFields"
                 ref="constructorsTable"
                 id="constructorsTable"
+                :per-page="perPageConstructors"
+                :current-page="currentPageConstructors"
               >
               </b-table>
             </b-card-body>
@@ -51,6 +75,16 @@
           </b-card-header>
           <b-collapse id="circuitsCollapse" accordion="circuitsCollapse" role="tabpanel">
            <b-card-body>
+              <b-pagination
+                v-model="currentPageCircuits"
+                :total-rows="rowsCircuits"
+                :per-page="perPageCircuits"
+                align="fill"
+                first-number
+                last-number
+                aria-controls="constructorsTable"
+                pills
+              ></b-pagination>
               <b-table
                 caption-top
                 sticky-header
@@ -58,10 +92,12 @@
                 small
                 head-variant="light"
                 responsive
-                :items="archiveCircuits"
+                :items="getCircuits"
                 :fields="circuitsFields"
                 ref="circuitsTable"
                 id="circuitsTable"
+                :per-page="perPageCircuits"
+                :current-page="currentPageCircuits"
               >
               </b-table>
             </b-card-body>
@@ -107,37 +143,47 @@ export default {
   mounted() {
     this.$root.$on('bv::collapse::state', (driversCollapse, isJustShown) => {
       if(driversCollapse == 'driversCollapse' && isJustShown)
-        this.getDrivers();
-      else if(driversCollapse == 'constructorsCollapse' && isJustShown)
-        this.getConstructors();
-      else if(driversCollapse == 'circuitsCollapse' && isJustShown)
-        this.getCircuits();
+        console.log('here')
+        //this.getDrivers();
+      //else if(driversCollapse == 'constructorsCollapse' && isJustShown)
+        //this.getConstructors();
+      //else if(driversCollapse == 'circuitsCollapse' && isJustShown)
+        //this.getCircuits();
     })
   },
   data : function() {
     return {
+      perPageDrivers: 30,
+      currentPageDrivers: 1,
+      rowsDrivers: 0,
+      currentPageConstructors: 1,
+      rowsConstructors: 0,
+      perPageConstructors: 30,
+      currentPageCircuits: 1,
+      rowsCircuits: 0,
+      perPageCircuits: 30,
       slide: 0,
       sliding: null,
       //drivers: [],
       driversFields:[
         // {key: 'profileName', label: 'Profile Name' },
-        {key: 'givenName', label: 'Name', sortable: true},
-        {key: 'familyName', label: 'Surname', sortable: true},
+        {key: 'givenName', label: 'Name'},
+        {key: 'familyName', label: 'Surname'},
         {key: 'dateOfBirth', label: 'Date of Birth' },
-        {key: 'nationality', label: 'Nationality', sortable: true},
+        {key: 'nationality', label: 'Nationality'},
         {key: 'url', label: 'Learn More...'},
       ],
       constructorsFields:[
         // {key: 'profileName', label: 'Profile Name' },
-        {key: 'name', label: 'Name', sortable: true},
-        {key: 'nationality', label: 'Nationality', sortable: true},
+        {key: 'name', label: 'Name'},
+        {key: 'nationality', label: 'Nationality'},
         {key: 'url', label: 'Learn More...'},
       ],
       circuitsFields:[
         // {key: 'profileName', label: 'Profile Name' },
-        {key: 'name', label: 'Name', sortable: true},
-        {key: 'circuitLocation.locality', label: 'Locality', sortable: true},
-        {key: 'circuitLocation.country', label: 'Country', sortable: true},
+        {key: 'name', label: 'Name'},
+        {key: 'circuitLocation.locality', label: 'Locality'},
+        {key: 'circuitLocation.country', label: 'Country'},
         {key: 'circuitLocation.latitude', label: 'latitude'},
         {key: 'circuitLocation.longitude', label: 'latitude'},
         {key: 'url', label: 'Learn More...'},
@@ -167,13 +213,14 @@ export default {
         this.sliding = false
       },
     getDrivers() {
-
-      let URL = 'portal/archive/drivers';
+      let URL = 'portal/archive/drivers?offset=' + (this.currentPageDrivers - 1)*this.perPageDrivers + '&limit=' + this.perPageDrivers;
       let promise = axios.get(URL)
       return promise.then((response) => {
           if(response.data.status == 'SUCCESS'){
             //this.drivers = response.data.drivers;
-            this.archiveDrivers = response.data.drivers;
+            //this.archiveDrivers = response.data.drivers;
+            this.rowsDrivers = response.data.totalDrivers;
+            return response.data.drivers;
           }else{
             alert('ALERT');
           }
@@ -184,11 +231,13 @@ export default {
         })
     },
     getConstructors() {
-      let URL = 'portal/archive/constructors';
+      let URL = 'portal/archive/constructors?offset=' + (this.currentPageConstructors - 1)*this.perPageConstructors + '&limit=' + this.perPageConstructors;
       let promise = axios.get(URL)
       return promise.then((response) => {
           if(response.data.status == 'SUCCESS'){
-            this.archiveConstructors = response.data.constructors;
+            //this.archiveConstructors = response.data.constructors;
+            this.rowsConstructors = response.data.totalConstructors;
+            return response.data.constructors;
           }else{
             alert('ALERT');
           }
@@ -199,11 +248,13 @@ export default {
         })
     },
     getCircuits() {
-      let URL = 'portal/archive/circuits';
+      let URL = 'portal/archive/circuits?offset=' + (this.currentPageCircuits - 1)*this.perPageCircuits + '&limit=' + this.perPageCircuits;
       let promise = axios.get(URL)
       return promise.then((response) => {
           if(response.data.status == 'SUCCESS'){
-            this.archiveCircuits = response.data.circuits;
+            //this.archiveCircuits = response.data.circuits;
+            this.rowsCircuits = response.data.totalCircuits;
+            return response.data.circuits;
           }else{
             alert('ALERT');
           }
@@ -262,18 +313,14 @@ export default {
     margin: 0 auto;
     width: 80%;
   }
-  .buttonGroup{
-    margin: 0 auto;
-    width: 80%;
-  }
-  .buttonGroup>b-button{
-    margin-right: 1%;
-  }
   .seasonsButton{
     margin-top: 5px;
     margin-bottom: 5px;
   }
   hr{
     width: 80%;
+  }
+  .archiveCollapse{
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
   }
 </style>

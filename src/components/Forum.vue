@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <div class="forumActions">
-        <b-button block variant="primary" v-if="userName != ''"  @click="$bvModal.show('addTopic'); clearTopicModal()">Add Topic</b-button>
+        <b-button block variant="primary" v-if="userName != ''"  @click="$bvModal.show('addTopic'); clearTopicModal()" class="addTopicButton">Add Topic</b-button>
           <b-modal id="addTopic" size="lg" hide-footer>
             <template #modal-title>
               Add New Topic
@@ -48,13 +48,15 @@
                     <p class="dateComment">Date: {{comment.creation_date}}</p>
                     <b-button class="mt-3" block variant="outline-info" v-if="userRole.includes('ROLE_MODERATOR') || userRole.includes('ROLE_ADMIN')" @click="deleteComment(comment.id)">Delete Comment</b-button>
                   </b-card-footer>
+                  <hr/>
                 </b-card>
             </b-card-body>
             <div class="actionButtonsDiv">
-              <b-button variant="outline-warning" v-if="userRole.includes('ROLE_MODERATOR') || userRole.includes('ROLE_ADMIN')" class="actionButtons" @click="approveOrDeleteTopic(false, item.id)">Delete</b-button>
-              <b-button variant="outline-success" v-if="userRole.includes('ROLE_MODERATOR') || userRole.includes('ROLE_ADMIN')" class="actionButtons" @click="approveOrDeleteTopic(true, item.id)" :disabled="item.approved == 1">Approve</b-button>
-              
-              <b-button variant="outline-success" class="actionButtons"  @click="$bvModal.show('addComment' + item.id); clearCommentModal()"  v-if="userRole != null && item.approved == 1">Comment</b-button>
+
+              <b-button variant="outline-warning" v-if="userRole.includes('ROLE_MODERATOR') || userRole.includes('ROLE_ADMIN')" class="actionButtons" @click="approveOrDeleteTopic(false, item.id)">Delete Post</b-button>
+              <b-button variant="outline-success" v-if="userRole.includes('ROLE_MODERATOR') || userRole.includes('ROLE_ADMIN')" class="actionButtons" @click="approveOrDeleteTopic(true, item.id)" :disabled="item.approved == 1">Approve Post</b-button>
+              <b-button variant="outline-success" class="actionButtonsComment"  @click="$bvModal.show('addComment' + item.id); clearCommentModal()"  v-if="userRole != null && item.approved == 1">Comment</b-button>
+
               <b-modal :id="'addComment' + item.id" size="lg" hide-footer>
                 <template #modal-title>
                  Comment on:<b> {{item.topic}}</b>
@@ -266,13 +268,18 @@ export default {
     float: right;
     width: 40%;
   }
-  .actionButtons{
+  .actionButtons, .actionButtonsComment{
     width: 32%;
     margin-right: 1%;
+    margin-bottom: 1%;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  }
+  .actionButtonsComment{
+    float: right;
   }
   .commentCards {
     border: none;
-    margin-bottom: 1%;
+    margin-bottom: 2%;
     box-shadow: none;
   }
   .userComment{
@@ -289,5 +296,8 @@ export default {
   }
   .commentFooter{
     box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;
+  }
+  .addTopicButton{
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
   }
 </style>
