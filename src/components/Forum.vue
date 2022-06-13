@@ -28,7 +28,7 @@
     <div class="accordion" role="tablist" v-for="item in allTopics" :key="item.id">
         <b-card no-body class="mb-1 forumCard" v-if="(userRole != null && item.approved == 1) || userRole.includes('ROLE_MODERATOR')  || userRole.includes('ROLE_ADMIN')">
           <b-card-header header-tag="header" class="p-1" role="tab">
-            <b-button block @click="openCollapse(item.id)" :variant="userRole.includes('ROLE_MODERATOR')  || userRole.includes('ROLE_ADMIN') ? item.approved == 0 ? 'outline-danger' : 'outline-success' : 'light'">
+            <b-button block class="cardHeaderButton" @click="openCollapse(item.id)" :variant="userRole.includes('ROLE_MODERATOR')  || userRole.includes('ROLE_ADMIN') ? item.approved == 0 ? 'outline-danger' : 'outline-success' : 'light'">
               <span class="postOwner">created by: {{item.topicOwner}}</span>
               {{item.topic}} 
               <span class="postDate">created: {{item.creation_date}}</span></b-button>
@@ -53,9 +53,12 @@
             </b-card-body>
             <div class="actionButtonsDiv">
 
-              <b-button variant="outline-warning" v-if="userRole.includes('ROLE_MODERATOR') || userRole.includes('ROLE_ADMIN')" class="actionButtons" @click="approveOrDeleteTopic(false, item.id)">Delete Post</b-button>
-              <b-button variant="outline-success" v-if="userRole.includes('ROLE_MODERATOR') || userRole.includes('ROLE_ADMIN')" class="actionButtons" @click="approveOrDeleteTopic(true, item.id)" :disabled="item.approved == 1">Approve Post</b-button>
-              <b-button variant="outline-success" class="actionButtonsComment"  @click="$bvModal.show('addComment' + item.id); clearCommentModal()"  v-if="userRole != null && item.approved == 1">Comment</b-button>
+              <b-button variant="outline-warning" v-if="userRole.includes('ROLE_MODERATOR') || userRole.includes('ROLE_ADMIN')" class="actionButtons" 
+                @click="approveOrDeleteTopic(false, item.id)">Delete Post</b-button>
+              <b-button variant="outline-success" v-if="userRole.includes('ROLE_MODERATOR') || userRole.includes('ROLE_ADMIN')" class="actionButtons"
+                @click="approveOrDeleteTopic(true, item.id)" :disabled="item.approved == 1">Approve Post</b-button>
+              <b-button variant="outline-success" class="actionButtonsComment" 
+               @click="$bvModal.show('addComment' + item.id); clearCommentModal()"  v-if="userRole != null && item.approved == 1">Comment</b-button>
 
               <b-modal :id="'addComment' + item.id" size="lg" hide-footer>
                 <template #modal-title>
@@ -299,5 +302,9 @@ export default {
   }
   .addTopicButton{
     box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    font-size: 20px;
+  }
+  .cardHeaderButton{
+        font-size: 20px;
   }
 </style>

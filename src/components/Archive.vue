@@ -3,7 +3,7 @@
     <div class="collapseDiv">
       <b-card no-body class="mb-1 archiveCards">
         <b-card-header header-tag="header" class="p-1" role="tab">
-          <b-button block variant="info" v-b-toggle.driversCollapse>Drivers</b-button>
+          <b-button block variant="info" v-b-toggle.driversCollapse class="collapseButtonArchive">Drivers</b-button>
         </b-card-header>
         <b-collapse id="driversCollapse" accordion="driversCollapse" role="tabpanel" class="archiveCollapse">
           <b-card-body>
@@ -37,7 +37,7 @@
       </b-card>
       <b-card no-body class="mb-1 archiveCards">
         <b-card-header header-tag="header" class="p-1" role="tab">
-          <b-button block variant="info" v-b-toggle.constructorsCollapse>Constructors</b-button>
+          <b-button block variant="info" v-b-toggle.constructorsCollapse class="collapseButtonArchive">Constructors</b-button>
         </b-card-header>
         <b-collapse id="constructorsCollapse" accordion="constructorsCollapse" role="tabpanel">
           <b-card-body>
@@ -71,7 +71,7 @@
         </b-card>
         <b-card no-body class="mb-1 archiveCards">
           <b-card-header header-tag="header" class="p-1" role="tab">
-            <b-button block variant="info" v-b-toggle.circuitsCollapse>Circuits</b-button>
+            <b-button block variant="info" v-b-toggle.circuitsCollapse class="collapseButtonArchive">Circuits</b-button>
           </b-card-header>
           <b-collapse id="circuitsCollapse" accordion="circuitsCollapse" role="tabpanel">
            <b-card-body>
@@ -105,7 +105,7 @@
         </b-card>
         <b-card no-body class="mb-1 archiveCards">
           <b-card-header header-tag="header" class="p-1" role="tab">
-            <b-button block variant="info" v-b-toggle.seasonsCollapse>Seasons</b-button>
+            <b-button block variant="info" v-b-toggle.seasonsCollapse class="collapseButtonArchive">Seasons</b-button>
           </b-card-header>
           <b-collapse id="seasonsCollapse" accordion="seasonsCollapse" role="tabpanel">
             <b-card-body>
@@ -322,5 +322,9 @@ export default {
   }
   .archiveCollapse{
     box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  }
+  .collapseButtonArchive{
+    font-size: 25px;
+    
   }
 </style>

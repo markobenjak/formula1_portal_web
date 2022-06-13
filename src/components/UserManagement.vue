@@ -4,6 +4,7 @@
       <b-table
         no-border-collapse
         small
+        striped
         head-variant="light"
         responsive
         hover
@@ -162,9 +163,11 @@ export default {
   .userTable{
     margin: 0 auto;
     width: 97%;
+    font-size: 18px;
   }
   .userCards {
     border: none;
+    box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.9) 0px 0px 0px 1px;
   }
   .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
     background-color: #d7faf9;

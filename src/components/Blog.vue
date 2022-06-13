@@ -237,9 +237,30 @@
             >
               Close
             </b-button>
-          </template>
+            <b-button
+              variant="warning"
+              class="modalButtons"
+              block 
+              size="sm"
+              @click="$bvModal.show('sendEmail')"
+            >
+              Sign Up
+            </b-button>
+
+            <b-modal id="sendEmail" size="lg">
+              <form ref="form" @submit.prevent="sendEmail">
+                <label>Name</label>
+                <input type="text" name="name">
+                <label>Email</label>
+                <input type="email" name="email">
+                <label>Message</label>
+                <textarea name="message"></textarea>
+                <input type="submit" value="Send">
+              </form>
+            </b-modal>
+        </template>
       </b-modal>
-       <b-modal id="blogPostDetails" size="lg">
+      <b-modal id="blogPostDetails" size="lg">
         <template #modal-title>
           {{blogPostTitle}}
         </template>
@@ -275,6 +296,7 @@
 import axios from 'axios'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 //import { required } from 'vuelidate/lib/validators'
+import emailjs from 'emailjs-com';
 export default {
   name: 'Blog',
   props: {
@@ -338,10 +360,30 @@ export default {
       planEmail: '',
       planId: null,
       blogPostContent: '',
-      blogPostTitle: ''
+      blogPostTitle: '',
+      name: '',
+      email: '',
+      message: ''
     } 
   },
   methods: {
+    sendEmail(e) {
+        var templateParams = {
+             name: this.name,
+             email: this.email,
+             message: this.message
+          };
+          emailjs.sendForm('service_x1o5xle', 'template_jt0otml',  this.$refs.form, 'vZRwejEA4VXc2Op2k')
+        .then((result) => {
+            console.log('SUCCESS!', result.text);
+        }, (error) => {
+            console.log('FAILED...', error.text);
+        });
+        // Reset form field
+        this.name = ''
+        this.email = ''
+        this.message = ''
+    },
     filterPosts(value){
       if(value == 1){
         this.allBlogPosts = [];
@@ -624,6 +666,7 @@ export default {
       box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
       margin-bottom: 3%;
       margin-top: 1%;
+      font-size: 15px;
     }
     .pac-container { z-index: 10000 !important; }
     .raceParagraph{
@@ -682,4 +725,45 @@ export default {
     }
 
     /*.breadcrumb-item+.breadcrumb-item::before{content:var(--bs-breadcrumb-divider,">") !important ;}*/
+
+
+    * {box-sizing: border-box;}
+
+    .container {
+      display: block;
+      margin:auto;
+      text-align: center;
+      border-radius: 5px;
+      background-color: #f2f2f2;
+      padding: 20px;
+      width: 50%;
+    }
+
+    label {
+      float: left;
+    }
+
+    input[type=text], [type=email], textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      margin-top: 6px;
+      margin-bottom: 16px;
+      resize: vertical;
+    }
+
+    input[type=submit] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    input[type=submit]:hover {
+      background-color: #45a049;
+    }
   </style>

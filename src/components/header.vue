@@ -74,12 +74,38 @@ export default {
 
     .navigation{
         margin: 0 auto;
+        width:20%;
+        margin-right: 42.3%;
     }
     .navItem{
         padding: 5%;
+        font-size: 20px;
+        font-family: "Bahnschrift Condensed";
     }
     .navItem:hover{
         border-bottom: 1px solid;
+    }
+
+    @media only screen and (max-width: 800px) {
+        .navigation {
+            width:5%;
+            margin-right: 60%;
+            font-size: 10px;
+        }
+         .navItem{
+            font-size: 18px;        
+        }
+    }
+
+    @media only screen and (max-width: 600px) {
+        .navigation {
+            width:1%;
+            margin-right: 70%;
+        }
+        .navItem{
+            font-size: 15px;        
+        }
+
     }
 
 </style>

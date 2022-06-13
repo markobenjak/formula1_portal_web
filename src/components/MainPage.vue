@@ -176,6 +176,15 @@
     </div>
     <hr/>
     <div class="carouselDiv">
+      <b-input-group size="md" class="mb-2 searchHashtag">
+        <b-input-group-prepend is-text>
+          <b-icon icon="search"></b-icon>
+        </b-input-group-prepend>
+        <b-form-input type="search" placeholder="Search hashtag" v-model="hashtag"></b-form-input>
+        <b-input-group-append>
+          <b-button variant="outline-info" @click="getSocialMedia(hashtag)">Search</b-button>
+        </b-input-group-append>
+      </b-input-group>
       <b-carousel
           id="carousel-1"
           v-model="slide"
@@ -189,58 +198,58 @@
           @sliding-end="onSlideEnd"
         >
           <!-- Text slides with image -->
-          <b-carousel-slide>
-            <template #img>
-              <img
-                class="d-block img-fluid w-100"
-                width="1024"
-                height="480"
-                src="../assets/White_background.png"
-                alt="image slot"
-              >
-            </template>
-            <iframe border=0 frameborder=0 height=500 width=500
-              :src="this.twitterUrls[0]"></iframe>
+        <b-carousel-slide>
+          <template #img>
+            <img
+              class="d-block img-fluid w-100"
+              width="1024"
+              height="480"
+              src="../assets/White_background.png"
+              alt="image slot"
+            >
+          </template>
+          <iframe border=0 frameborder=0 height=500 width=500
+            :src="this.twitterUrls[0]"></iframe>
 
-            <iframe border=0 frameborder=0 height=500 width=500
-              :src="this.twitterUrls[1]"></iframe>
-          </b-carousel-slide>
+          <iframe border=0 frameborder=0 height=500 width=500
+            :src="this.twitterUrls[1]"></iframe>
+        </b-carousel-slide>
 
 
-          <b-carousel-slide>
-            <template #img>
-              <img
-                class="d-block img-fluid w-100"
-                width="1024"
-                height="480"
-                src="../assets/White_background.png"
-                alt="image slot"
-              >
-            </template>
-            <iframe border=0 frameborder=0 height=500 width=500
-              :src="this.twitterUrls[2]"></iframe>
+        <b-carousel-slide>
+          <template #img>
+            <img
+              class="d-block img-fluid w-100"
+              width="1024"
+              height="480"
+              src="../assets/White_background.png"
+              alt="image slot"
+            >
+          </template>
+          <iframe border=0 frameborder=0 height=500 width=500
+            :src="this.twitterUrls[2]"></iframe>
 
-            <iframe border=0 frameborder=0 height=500 width=500
-              :src="this.twitterUrls[3]"></iframe>
-          </b-carousel-slide>
+          <iframe border=0 frameborder=0 height=500 width=500
+            :src="this.twitterUrls[3]"></iframe>
+        </b-carousel-slide>
 
-          <b-carousel-slide>
-            <template #img>
-              <img
-                class="d-block img-fluid w-100"
-                width="1024"
-                height="480"
-                src="../assets/White_background.png"
-                alt="image slot"
-              >
-            </template>
-            <iframe border=0 frameborder=0 height=500 width=500
-              :src="this.twitterUrls[4]"></iframe>
+        <b-carousel-slide>
+          <template #img>
+            <img
+              class="d-block img-fluid w-100"
+              width="1024"
+              height="480"
+              src="../assets/White_background.png"
+              alt="image slot"
+            >
+          </template>
+          <iframe border=0 frameborder=0 height=500 width=500
+            :src="this.twitterUrls[4]"></iframe>
 
-            <iframe border=0 frameborder=0 height=500 width=500
-              :src="this.twitterUrls[5]"></iframe>
-          </b-carousel-slide>
-        </b-carousel>
+          <iframe border=0 frameborder=0 height=500 width=500
+            :src="this.twitterUrls[5]"></iframe>
+        </b-carousel-slide>
+      </b-carousel>
     </div>
   </div>
 </template>
@@ -269,6 +278,7 @@ export default {
       signUpEmail: '',
       signUpFullName: '',
       twitterUrls: [],
+      hashtag: "",
     } 
   },
   computed:{
@@ -279,7 +289,7 @@ export default {
   mounted (){
     this.getArticles();
     this.getCurrentSeason();
-    this.getSocialMedia();
+    this.getSocialMedia("formula1");
   },
   methods: {
       clearLoginModal(){
@@ -379,8 +389,11 @@ export default {
           alert('ALERTR');
         })
     },
-    getSocialMedia() {
-      let URL = 'portal/socialMedia';
+    getSocialMedia(hashtag) {
+      if(hashtag == null || hashtag == undefined || hashtag == ""){
+        hashtag = "formula1"
+      }
+      let URL = 'portal/socialMedia?hashtag=' + hashtag;
       let promise = axios.get(URL)
       return promise.then((response) => {
           if(response.status == '200'){
@@ -422,6 +435,7 @@ export default {
     width: 80%;
     margin: 0 auto;
     margin-bottom:  3%;
+    font-size: 20px;
   }
   hr{
     width: 80%;
@@ -438,6 +452,7 @@ export default {
     float: left;
     width: 49%;
     margin-bottom: 2%;
+    font-size: 20px;
   }
   .tabDiv > p{
     text-align: center;
@@ -503,9 +518,15 @@ export default {
     box-shadow: 0 0 10px 0 #00d7c3 inset, 0 0 20px 2px #00d7c3;
     border: 3px solid #00d7c3;
   }
+  .searchHashtag {
+    width: 30%;
+    margin-bottom: -10%;
+  }
 
-
-
-
+  @media only screen and (max-width: 800px) {
+      .userButton {
+          width: 100px;
+      }
+  }
 
 </style>
