@@ -124,7 +124,8 @@
             />
           </GmapMap>
           <br/>
-          <label for="example-input">Trip Description: </label>
+          <label for="example-input"><b>Trip Description: </b></label>
+          <br/>
           <div id="editor" class="formEditor">
             <ckeditor :editor="editor" v-model="editorDataRacePlan" :config="editorConfig"></ckeditor>
           </div>
@@ -168,9 +169,11 @@
               <p class="raceParagraph">To: <b>{{item.to}}</b></p>
               <p class="raceParagraph">Price: <b>{{item.price}}</b></p>
             </div>
+            <p> I am here: {{item.latitude}}
+            </p>
             <div class="raceDescDiv">
               <GmapMap
-                :center="{lat:item.latitude, lng:item.longitude}"
+                :center="{lat:parseFloat(item.latitude), lng:(item.longitude)}"
                 :zoom="12"
                 style="width: 100%; height: 200px"
               >

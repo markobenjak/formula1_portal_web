@@ -1,29 +1,45 @@
 <template>
   <div class="hello">
     <div class="forumActions">
-        <b-button block variant="primary" v-if="userName != ''"  @click="$bvModal.show('addTopic'); clearTopicModal()" class="addTopicButton">Add Topic</b-button>
-          <b-modal id="addTopic" size="lg" hide-footer>
-            <template #modal-title>
-              Add New Topic
-            </template>
-            <label for="inputTopic"><b>Topic:</b></label>
-            <b-form-input
-              id="inputTopic"
-              v-model="topic"
-              :state="nameState"
-              aria-describedby="input-live-help input-live-feedback"
-              placeholder="Topic"
-              trim
-            ></b-form-input>
-            <b-form-invalid-feedback id="input-live-feedback">
-              Enter at least 3 letters
-            </b-form-invalid-feedback>
-            <div id="editor" class="formEditor">
-              <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
-            </div>
-            <b-button class="mt-3" block @click="$bvModal.hide('addTopic')">Close</b-button>
-            <b-button class="mt-3" variant="success" block @click="$bvModal.hide('addTopic'); insertTopic()">Finish</b-button>
-          </b-modal>
+      <b-popover target="addTopicButton" triggers="hover" placement="top">
+        <template #title>Forum Rules</template>
+         Follow the <b>rules</b>! Details can be found on the link bellow.
+         <hr/>
+        <b-button v-b-modal="'forumRulesModal'" size="sm" variant="primary" block>Rules</b-button>
+      </b-popover>
+      <b-modal id="forumRulesModal" size="lg">
+        <p v-html="forumRulesData"></p>
+        <template #modal-footer="{cancel}">
+          <div class="w-100">
+            <b-button size="sm" block variant="danger" @click="cancel()">
+              Close
+            </b-button>
+          </div>
+        </template>
+      </b-modal>
+      <b-button block variant="primary" v-if="userName != ''"  @click="$bvModal.show('addTopic'); clearTopicModal()" class="addTopicButton" id="addTopicButton">Add Topic</b-button>
+      <b-modal id="addTopic" size="lg" hide-footer>
+        <template #modal-title>
+          Add New Topic
+        </template>
+        <label for="inputTopic"><b>Topic:</b></label>
+        <b-form-input
+          id="inputTopic"
+          v-model="topic"
+          :state="nameState"
+          aria-describedby="input-live-help input-live-feedback"
+          placeholder="Topic"
+          trim
+        ></b-form-input>
+        <b-form-invalid-feedback id="input-live-feedback">
+          Enter at least 3 letters
+        </b-form-invalid-feedback>
+        <div id="editor" class="formEditor">
+          <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
+        </div>
+        <b-button class="mt-3" block @click="$bvModal.hide('addTopic')">Close</b-button>
+        <b-button class="mt-3" variant="success" block @click="$bvModal.hide('addTopic'); insertTopic()">Finish</b-button>
+      </b-modal>
     </div>
     <div class="accordion" role="tablist" v-for="item in allTopics" :key="item.id">
         <b-card no-body class="mb-1 forumCard" v-if="(userRole != null && item.approved == 1) || userRole.includes('ROLE_MODERATOR')  || userRole.includes('ROLE_ADMIN')">
@@ -81,6 +97,7 @@
 <script>
 import axios from 'axios'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import forumRules from '!raw-loader!../assets/forumRules.txt';
 //import { required } from 'vuelidate/lib/validators'
 export default {
   name: 'Forum',
@@ -110,7 +127,8 @@ export default {
       // The configuration of the editor.
       },
       topic: '',
-      allTopics: []
+      allTopics: [],
+      forumRulesData: forumRules
 
     } 
   },
