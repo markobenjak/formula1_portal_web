@@ -12,7 +12,7 @@ export default new Vuex.Store({
         storage: window.sessionStorage,
     })],
   state: {
-    user: {username: '', sessionID: null, userRole: [] }, //TODO staviti na []
+    user: {username: '', sessionID: null, userRole: [] },
   },
   mutations: {
     setSessionID (state, sessionID) {

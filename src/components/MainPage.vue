@@ -109,14 +109,14 @@
         <b-tabs content-class="mt-3" fill active-nav-item-class="font-weight-bold text-uppercase text-danger" small>
           <b-tab title="Previous">
             <div class="tabDiv">
-              <p>Race Name: {{this.currentSeason[0].raceName}}</p>
-              <p>Location: {{this.currentSeason[0].circuit.circuitLocation.country}}</p>
-              <p>Date: {{this.currentSeason[0].date}}</p>
-              <p>Time: {{this.currentSeason[0].time}}</p>
+              <p>Race Name: {{this.currentSeason[12].raceName}}</p>
+              <p>Location: {{this.currentSeason[12].circuit.circuitLocation.country}}</p>
+              <p>Date: {{this.currentSeason[12].date}}</p>
+              <p>Time: {{this.currentSeason[12].time}}</p>
             </div >
             <div class="tabDiv">
               <GmapMap
-                :center="{lat:parseInt(this.currentSeason[0].circuit.circuitLocation.latitude), lng: parseInt(this.currentSeason[0].circuit.circuitLocation.longitude)}"
+                :center="{lat:parseInt(this.currentSeason[12].circuit.circuitLocation.latitude), lng: parseInt(this.currentSeason[12].circuit.circuitLocation.longitude)}"
                 :zoom="7"
                 map-type-id="terrain"
                 style="width: 100%; height: 300px"
@@ -126,14 +126,14 @@
           </b-tab>
           <b-tab title="Current" active>            
             <div class="tabDiv">
-              <p>Race Name: {{this.currentSeason[1].raceName}}</p>
-              <p>Location: {{this.currentSeason[1].circuit.circuitLocation.country}}</p>
-              <p>Date: {{this.currentSeason[1].date}}</p>
-              <p>Time: {{this.currentSeason[1].time}}</p>
+              <p>Race Name: {{this.currentSeason[13].raceName}}</p>
+              <p>Location: {{this.currentSeason[13].circuit.circuitLocation.country}}</p>
+              <p>Date: {{this.currentSeason[13].date}}</p>
+              <p>Time: {{this.currentSeason[13].time}}</p>
             </div>
             <div class="tabDiv">
               <GmapMap
-                :center="{lat: parseInt(this.currentSeason[1].circuit.circuitLocation.latitude), lng: parseInt(this.currentSeason[1].circuit.circuitLocation.longitude)}"
+                :center="{lat: parseInt(this.currentSeason[13].circuit.circuitLocation.latitude), lng: parseInt(this.currentSeason[13].circuit.circuitLocation.longitude)}"
                 :zoom="7"
                 map-type-id="terrain"
                 style="width: 100%; height: 300px"
@@ -143,14 +143,14 @@
           </b-tab>
           <b-tab title="Next">            
             <div class="tabDiv">
-              <p>Race Name: {{this.currentSeason[2].raceName}}</p>
-              <p>Location: {{this.currentSeason[2].circuit.circuitLocation.country}}</p>
-              <p>Date: {{this.currentSeason[2].date}}</p>
-              <p>Time: {{this.currentSeason[2].time}}</p>
+              <p>Race Name: {{this.currentSeason[14].raceName}}</p>
+              <p>Location: {{this.currentSeason[14].circuit.circuitLocation.country}}</p>
+              <p>Date: {{this.currentSeason[14].date}}</p>
+              <p>Time: {{this.currentSeason[14].time}}</p>
             </div>
             <div class="tabDiv">
               <GmapMap
-                :center="{lat:parseInt(this.currentSeason[2].circuit.circuitLocation.latitude), lng: parseInt(this.currentSeason[2].circuit.circuitLocation.longitude)}"
+                :center="{lat:parseInt(this.currentSeason[14].circuit.circuitLocation.latitude), lng: parseInt(this.currentSeason[14].circuit.circuitLocation.longitude)}"
                 :zoom="7"
                 map-type-id="terrain"
                 style="width: 100%; height: 300px"
@@ -208,10 +208,10 @@
               alt="image slot"
             >
           </template>
-          <iframe border=0 frameborder=0 height=500 width=500
+          <iframe border=0 frameborder=0 height=400 width=400
             :src="this.twitterUrls[0]"></iframe>
 
-          <iframe border=0 frameborder=0 height=500 width=500
+          <iframe border=0 frameborder=0 height=400 width=400
             :src="this.twitterUrls[1]"></iframe>
         </b-carousel-slide>
 
@@ -226,10 +226,10 @@
               alt="image slot"
             >
           </template>
-          <iframe border=0 frameborder=0 height=500 width=500
+          <iframe border=0 frameborder=0 height=400 width=400
             :src="this.twitterUrls[2]"></iframe>
 
-          <iframe border=0 frameborder=0 height=500 width=500
+          <iframe border=0 frameborder=0 height=400 width=400
             :src="this.twitterUrls[3]"></iframe>
         </b-carousel-slide>
 
@@ -243,10 +243,10 @@
               alt="image slot"
             >
           </template>
-          <iframe border=0 frameborder=0 height=500 width=500
+          <iframe border=0 frameborder=0 height=400 width=400
             :src="this.twitterUrls[4]"></iframe>
 
-          <iframe border=0 frameborder=0 height=500 width=500
+          <iframe border=0 frameborder=0 height=400 width=400
             :src="this.twitterUrls[5]"></iframe>
         </b-carousel-slide>
       </b-carousel>

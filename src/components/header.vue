@@ -8,7 +8,7 @@
         <b-navbar-nav class="navigation">
             <b-nav-item class="navItem" to="/">Home</b-nav-item>
             <b-nav-item class="navItem" to="/archive">Archive</b-nav-item>
-            <b-nav-item class="navItem" to="/userManagement" v-if="userRole != null && userRole.includes('ROLE_ADMIN')">UserManagement</b-nav-item>
+            <b-nav-item class="navItem" to="/userManagement" v-if="userRole != null && userRole.includes('ROLE_ADMIN')">User Management</b-nav-item>
             <b-nav-item class="navItem" to="/forum">Forum</b-nav-item>
             <b-nav-item class="navItem" to="/blog">Blog</b-nav-item>
         </b-navbar-nav>

@@ -169,8 +169,6 @@
               <p class="raceParagraph">To: <b>{{item.to}}</b></p>
               <p class="raceParagraph">Price: <b>{{item.price}}</b></p>
             </div>
-            <p> I am here: {{item.latitude}}
-            </p>
             <div class="raceDescDiv">
               <GmapMap
                 :center="{lat:parseFloat(item.latitude), lng:(item.longitude)}"
@@ -426,7 +424,7 @@ export default {
       })
       return promise.then((response) => {
         if(response.status == 200){
-          this.makeToast("Topic Created", "success", response.data.message, 30000);
+          this.makeToast("Topic Deleted", "success", response.data.message, 30000);
           this.getAllRacePlans();
           this.getAllBlogPosts();
         }else{
@@ -517,7 +515,7 @@ export default {
       return promise.then((response) => {
         if(response.status == 200){
           this.getAllRacePlans();
-          this.makeToast("Topic Created", "success", response.data.message, 30000);
+          this.makeToast("Blog Post Created", "success", response.data.message, 30000);
           this.getAllBlogPosts();
         }else{
           alert('ALERT');
