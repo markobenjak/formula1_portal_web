@@ -24,7 +24,7 @@ import { StatusCodes } from 'http-status-codes';
 
 Vue.use(VueGoogleMaps, {
   load: {
-    key: 'AIzaSyC7Jd1bi16TIYlVnxRfAmgGvk_7GnXEP9g',
+    key: 'test',
     libraries: 'places',
   }
 });
